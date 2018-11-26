@@ -3,6 +3,31 @@ import MenuBar from '../components/MenuBar.js'
 import { Profile, Photos, Cocktails, Pokemon} from '../components/Pages.js'
 
 class MainBox extends React.Component {
+  constructor() {
+    super()
+    this.state={
+      displayedPage: <Profile />
+    }
+  }
+
+  changePage = str => {
+    switch (str) {
+      case 'profile':
+        this.setState({ displayedPage: <Profile />})
+        break;
+      case 'photo':
+        this.setState({ displayedPage: <Photos />})
+        break;
+      case 'cocktail':
+        this.setState({ displayedPage: <Cocktails />})
+        break;
+      case 'pokemon':
+        this.setState({ displayedPage: <Pokemon />})
+        break;
+      default:
+        break;
+    }
+  }
 
 
   render() {
@@ -17,8 +42,8 @@ class MainBox extends React.Component {
 
     return (
       <div>
-        <MenuBar />
-        {detailsToDisplay}
+        <MenuBar changePage={this.changePage}/>
+        {this.state.displayedPage}
       </div>
     )
   }
